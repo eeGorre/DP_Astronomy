@@ -39,6 +39,8 @@ class Programm:
                 self.interface.handler(event, self.clock)
                 self.camera.zoom(event, keys, mouse_pos)    
                 
+                
+                
                 if event.type == pg.KEYDOWN and event.key == pg.K_p:
                     self.pause = not self.pause
                     
@@ -46,6 +48,8 @@ class Programm:
                     self.time_k = 0
                 else:
                     self.time_k = 1000
+                    
+                    
                     
             self.camera.move()                               
             self.clock.tick(FPS)    
