@@ -21,8 +21,9 @@ class AstroObjects:
         self.selected = False
         
     def render(self, screen, camera, mouse_pos, event):
-        if self.radius*camera.e1 <= 1:
-            radius = 1
+        
+        if self.radius*camera.e1 <= 3:
+            radius = 4
         else:
             radius = self.radius*camera.e1
         pg.draw.circle(screen, self.color,
@@ -40,9 +41,7 @@ class AstroObjects:
             camera.rect.y = (self.y*camera.zoom_level - WIN_HEIGHT // 2)
             # camera.rect.x = self.x*camera.zoom_level
             # camera.rect.y = self.y*camera.zoom_level
-        print(self.selected)
-        
-        
+        print(self.selected)            
         
         self.past_positions.append((self.x, self.y))
         self.draw_trajectory(screen, camera, self.past_positions)
