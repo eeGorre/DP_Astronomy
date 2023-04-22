@@ -28,8 +28,8 @@ class Camera:
             x_pos = self.rect.x = -WIN_WIDTH // 2
             y_pos = self.rect.y = -WIN_HEIGHT // 2
  
-        x_pos = (mouse_pos[0] + self.x) 
-        y_pos = (mouse_pos[1] + self.y)  
+        x_pos = (mouse_pos[0] + self.x) / 4
+        y_pos = (mouse_pos[1] + self.y) / 4
         
         if event.type == pg.MOUSEBUTTONDOWN:
             if event.button == 4:
