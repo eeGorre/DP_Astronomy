@@ -131,6 +131,7 @@ class Astronomy:
         for obj in self.objects:
             obj.render(screen, camera, mouse_pos, event)
             
+            
 
         
         
