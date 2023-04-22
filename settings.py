@@ -1,0 +1,9 @@
+WIN_WIDTH =  int(1920 * 0.7)
+WIN_HEIGHT = int(1080 * 0.7)
+
+
+# WIN_WIDTH =  1280
+# WIN_HEIGHT = 720
+
+
+FPS = 300
