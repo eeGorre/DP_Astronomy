@@ -145,7 +145,9 @@ class Astronomy:
         screen.fill((0, 0, 0))
         
         self.physics.move(delta_time, camera)
-        self.astro_interface.obj_name(screen, camera)
-
+        
         for obj in self.objects:
             obj.render(screen, camera, mouse_pos, event)
+            
+        self.astro_interface.obj_name(screen, camera)
+        self.astro_interface.obj_menu(screen)

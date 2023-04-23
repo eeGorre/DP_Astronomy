@@ -16,7 +16,7 @@ class Programm:
         self.camera = Camera()
         self.interface = Interface() 
         self.pause = False
-        self.time_k = 1 / 1000
+        self.time_k = 500
         
     def run(self):
         while 1:                   

@@ -17,7 +17,7 @@ class AstroObjects:
         
     def render(self, screen, camera, mouse_pos, event):
         if self.radius*camera.e <= 3:
-            radius = 4
+            radius = 2
         else:
             radius = self.radius*camera.e
             
