@@ -14,7 +14,7 @@ class Astronomy:
                                 2*10**30, 
                                 0, 0, 
                                 695_700_000,
-                                (255, 255, 115))
+                                (255, 255, 200))
         
         self.Mercury = AstroObjects(0.4*self.AU,
                                     0,
@@ -124,49 +124,28 @@ class Astronomy:
         self.Neptune = AstroObjects(30*self.AU,
                                     0,
                                     "Neptune",
-                                    10**26, #10**26
+                                    10**26,
                                     0, sqrt(self.G*self.Sun.m / (30 * self.AU)), 
                                     24_620_000,
                                     (0, 20, 165))
         
-        self.Triton = AstroObjects(self.Neptune.x + 354_760_000, #354_760_000 - радиус орбиты вокруг Нептуна
+        self.Triton = AstroObjects(self.Neptune.x + 354_760_000,
                                    0,
                                    "Triton",
                                    2.14*10**22,
                                    0, sqrt(self.G*self.Sun.m / (30 * self.AU)) + sqrt(6.67 * (10**-11)*self.Neptune.m / 354_760_000),
-                                   1_353_400, #1353400
+                                   1_353_400, 
                                    (255, 210, 210))
-        
-        self.Light = AstroObjects(0,
-                                  0,
-                                  "Light",
-                                  0,
-                                  300_000, 0,
-                                  1,
-                                  (255, 255, 255))
         
         self.objects = [self.Sun,self.Mercury, self.Venus, self.Earth, self.Moon, self.Ceres, self.Mars, self.Jupiter, self.Uranus, self.Neptune, self.Triton, self.Europa, self.Ganymede, self.Io, self.Callisto]
         self.astro_interface = Astro_Interface(self.objects)
         self.physics = Physics(self.objects)
         
-        
-        # self.objects = [self.Sun, self.Mercury, self.Venus, self.Earth, self.Moon, self.Mars, self.Ceres, self.Jupiter, self.Saturn, self.Uranus, self.Neptune, self.Triton]
-        
-        
     def level(self, screen, camera, delta_time, mouse_pos, event):
         screen.fill((0, 0, 0))
-               
         
         self.physics.move(delta_time, camera)
         self.astro_interface.obj_name(screen, camera)
 
         for obj in self.objects:
             obj.render(screen, camera, mouse_pos, event)
-            
-            
-
-        
-        
-        
-        
-        

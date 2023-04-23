@@ -163,4 +163,3 @@ class Object:
         
     def __del__(self):
         print(f'{self} удалён.')
-        

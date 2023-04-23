@@ -11,6 +11,6 @@ class Astro_Interface:
     def obj_name(self, screen, camera):    
         for obj in self.objects:
             planet_name = self.fnt452645126.render(obj.name, 1, (255, 255, 255))
-            screen.blit(planet_name, ((obj.x + obj.radius) * camera.zoom_level - camera.rect.x, (obj.y - obj.radius) * camera.zoom_level - camera.rect.y))
+            screen.blit(planet_name, ((obj.x + obj.radius) * camera.e - camera.x, (obj.y - obj.radius) * camera.e - camera.y))
 
             
