@@ -15,6 +15,7 @@ class AstroObjects:
         self.color = color
         self.selected = False
         
+        
     def render(self, screen, camera, mouse_pos, event):
         if self.radius*camera.e <= 3:
             radius = 2
@@ -25,11 +26,13 @@ class AstroObjects:
                        (self.x*camera.e - camera.x, self.y*camera.e - camera.y),
                        (radius))
 
-        if event.type == pg.MOUSEBUTTONUP:
-            if (self.x*camera.e - camera.x) <= mouse_pos[0] <= (self.x*camera.e - camera.x) + (radius * 15) * 2 and (self.y*camera.e - camera.y) <= mouse_pos[1] <= (self.y*camera.e - camera.y) + (radius * 15) * 2:
+        if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+            if (self.x*camera.e - camera.x) - 100 <= mouse_pos[0] <= (self.x*camera.e - camera.x) + (radius * 5) * 2 and (self.y*camera.e - camera.y) - 100 <= mouse_pos[1] <= (self.y*camera.e - camera.y) + (radius * 5) * 2:
                 self.selected = True
+                pg.time.wait(100)
             else:
                 self.selected = False
+            
         
         if self.selected:
             camera.x = (self.x*camera.e - WIN_WIDTH // 2)
@@ -42,11 +45,9 @@ class AstroObjects:
         if len(self.trace) < 5000:
             for i in range(1, len(positions), 100):
                 x1, y1 = positions[i-1]
-                x2, y2 = positions[i]
                 x1 = x1 * camera.e - camera.x
                 y1 = y1 * camera.e - camera.y
-                x2 = x2 * camera.e - camera.x
-                y2 = y2 * camera.e - camera.y
-                pg.draw.circle(screen, (150, 150, 150), (x1, y1), 1)
+                pg.draw.circle(screen, (60, 60, 60), (x1, y1), 1)
         else:
             del self.trace[:100]
+            
