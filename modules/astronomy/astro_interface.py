@@ -11,7 +11,7 @@ class Astro_Interface:
 
     def obj_name(self, screen, camera):    
         for obj in self.objects:
-            planet_name = self.fnt.render(obj.name, 1, (255, 255, 255))
+            planet_name = self.fnt.render(obj.name, 1, (180, 180, 180))
             screen.blit(planet_name, ((obj.x + obj.radius) * camera.e - camera.x, (obj.y - obj.radius) * camera.e - camera.y))
             
     def obj_menu(self, screen):

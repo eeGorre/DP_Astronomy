@@ -1,5 +1,7 @@
 import pygame as pg
 from settings import WIN_WIDTH, WIN_HEIGHT
+import math
+
 
 class Camera:
     def __init__(self):
