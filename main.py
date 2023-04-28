@@ -11,7 +11,6 @@ pg.mixer.music.play()
 
 
 class Programm:
-    
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode((WIN_WIDTH, WIN_HEIGHT),
@@ -21,7 +20,8 @@ class Programm:
         self.camera = Camera()
         self.interface = Interface() 
         self.pause = False
-        self.time_k = 500
+        self.time_k = 100
+        self.time_k_saved = self.time_k
     
     def run(self):
         while 1:                   
@@ -36,27 +36,35 @@ class Programm:
                 
                 if event.type == pg.KEYDOWN and event.key == pg.K_p:
                     self.pause = not self.pause
-                
-                if self.pause:
-                    self.time_k = 0
-                else:
-                    if event.type == pg.MOUSEBUTTONDOWN and keys[pg.K_t]:
-                        self.time_k = self.time_k
-                        if event.button == 4:
-                            self.time_k *= 1.0325
-                        if event.button == 5:
-                            self.time_k /= 1.0325
-                                           
+                    if self.pause:
+                        self.time_k_saved = self.time_k
+                        self.time_k = 0
+                    else:
+                        self.time_k = self.time_k_saved
+                    
+                if event.type == pg.MOUSEBUTTONDOWN and keys[pg.K_t]:
+                    if event.button == 4:
+                        self.time_k *= 1.03125
+                    if event.button == 5:
+                        self.time_k /= 1.03125
+            
+            
+                                   
             mouse_rel_pos = list(pg.mouse.get_rel())
             
             self.camera.move(mouse_rel_pos)                               
-            self.clock.tick(FPS)    
+            self.clock.tick(FPS)   
+            
             self.delta_time = self.clock.get_time() * self.time_k
+            
             self.astronomy.level(self.screen, self.camera, self.delta_time, mouse_pos, event)
             
             self.interface.show_fps(self.clock)
             self.interface.mouse_coords(self.camera, self.screen)
+            self.interface.time(self.time_k, self.screen)
 
+            
+            
             pg.display.update()
             
 if __name__ == '__main__':

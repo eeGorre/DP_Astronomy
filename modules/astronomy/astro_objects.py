@@ -3,7 +3,7 @@ from settings import WIN_HEIGHT, WIN_WIDTH
 
 
 class AstroObjects:
-    def __init__(self, x, y, name, m, vx, vy, radius, color):
+    def __init__(self, x, y, name, m, vx, vy, radius, obj_type, color):
         self.name = name
         self.m = m
         self.vx = vx
@@ -14,11 +14,18 @@ class AstroObjects:
         self.trace = []
         self.color = color
         self.selected = False
-        
+        self.obj_type = obj_type
         
     def render(self, screen, camera, mouse_pos, event):
         if self.radius*camera.e <= 3:
-            radius = 2
+            if self.obj_type == 'Star':
+                radius = 4
+            if self.obj_type == 'Planet':
+                radius = 3
+            if self.obj_type == 'Sputnik':
+                radius = 2
+            if self.obj_type == 'Asteroid':
+                radius = 1
         else:
             radius = self.radius*camera.e
             
@@ -27,13 +34,12 @@ class AstroObjects:
                        (radius))
 
         if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-            if (self.x*camera.e - camera.x) - 100 <= mouse_pos[0] <= (self.x*camera.e - camera.x) + (radius * 5) * 2 and (self.y*camera.e - camera.y) - 100 <= mouse_pos[1] <= (self.y*camera.e - camera.y) + (radius * 5) * 2:
+            if (self.x*camera.e - camera.x) - 100 <= mouse_pos[0] <= (self.x*camera.e - camera.x) + (radius * 2) * 2 and (self.y*camera.e - camera.y) - 100 <= mouse_pos[1] <= (self.y*camera.e - camera.y) + (radius * 2) * 2:
                 self.selected = True
-                pg.time.wait(100)
+                pg.time.wait(200)
             else:
                 self.selected = False
             
-        
         if self.selected:
             camera.x = (self.x*camera.e - WIN_WIDTH // 2)
             camera.y = (self.y*camera.e - WIN_HEIGHT // 2)        

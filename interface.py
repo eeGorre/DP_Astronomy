@@ -66,13 +66,18 @@ class Interface:
         self.switcher = pg.image.load("assets/Switcher.png").convert_alpha()
         
     def mouse_coords(self, camera, screen):
+        AU = 150*10**9
         self.pos = pg.mouse.get_pos()
-        mouse_coords_hud = self.fnt.render(f'{round(((0 + camera.x)+self.pos[0])/camera.e, 2), -round(((0 + camera.y) + self.pos[1])/camera.e, 2)}', 1, (200, 200, 200))
+        mouse_coords_hud = self.fnt.render(f'{"{:.1f}".format(round(((0 + camera.x)+self.pos[0])/camera.e, 1)/AU), "{:.1f}".format(-round(((0 + camera.y) + self.pos[1])/camera.e, 1)/AU)}', 1, (150, 150, 150))
         screen.blit(mouse_coords_hud, (self.pos[0]+self.mouse_coords_font_size//2,self.pos[1]-self.mouse_coords_font_size-2))
         
     def show_fps(self, clock):
         pg.display.set_caption("FPS: {:.2f}".format(clock.get_fps()))
 
+    def time(self, time_k, screen):
+        time_hud = self.fnt.render((f'TIME: {"{:.0f}".format(round(time_k, 5)*1000)}'), 1, (200, 200, 200))
+        screen.blit(time_hud, (5, 5))
+    
     def camera_menu(self, screen, camera, grid):
         input11 = self.area_active3.get_rect(topleft = (300, 60))
         input12 = self.area_active3.get_rect(topleft = (300, 90))
