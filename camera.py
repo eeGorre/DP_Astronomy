@@ -19,8 +19,8 @@ class Camera:
         self.m_wy = (mouse_S[1] + self.Oy) / self.e
 
         if keys[pg.K_0]:
-            self.Ox = mouse_S[0] = -WIN_WIDTH // 2
-            self.Oy = mouse_S[1] = -WIN_HEIGHT // 2
+            self.Ox = -WIN_WIDTH // 2
+            self.Oy = -WIN_HEIGHT // 2
         
         if event.type == pg.MOUSEBUTTONDOWN and not keys[pg.K_t]:
             if event.button == 4:
@@ -34,26 +34,3 @@ class Camera:
                 self.e = self.k**self.n
                 self.Ox = self.e*self.m_wx - mouse_S[0]
                 self.Oy = self.e*self.m_wy - mouse_S[1]
-
-
-    
-    
-    
-    # def zoom(self, event, keys, mouse_pos):
-    #     if keys[pg.K_0]:
-    #         self.x = x_pos = -WIN_WIDTH // 2
-    #         self.y = y_pos = -WIN_HEIGHT // 2
-        
-        
-    #     if event.type == pg.MOUSEBUTTONDOWN and not keys[pg.K_t]:
-    #         x_pos = event.pos[0] + self.x
-    #         y_pos = event.pos[1] + self.y
-    #         if event.button == 4:
-    #             self.e *= 1.0625
-    #             self.x = x_pos - WIN_WIDTH // 2
-    #             self.y = y_pos - WIN_HEIGHT // 2
-                
-    #         if event.button == 5:
-    #             self.e /= 1.0625
-    #             self.x = x_pos - WIN_WIDTH // 2
-    #             self.y = y_pos - WIN_HEIGHT // 2

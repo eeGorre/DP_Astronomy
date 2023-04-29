@@ -11,15 +11,30 @@ class Astro_Interface:
 
     def mouse_coords(self, camera, screen):
         self.pos = pg.mouse.get_pos()
-        mouse_coords_hud = self.fnt.render(f'{round(((0 + camera.x)+self.pos[0])/camera.e, 2), -round(((0 + camera.y) + self.pos[1])/camera.e, 2)}', 1, (200, 200, 200))
+        mouse_coords_hud = self.fnt.render(f'{round(((0 + camera.Ox)+self.pos[0])/camera.e, 2), -round(((0 + camera.Oy) + self.pos[1])/camera.e, 2)}', 1, (200, 200, 200))
         screen.blit(mouse_coords_hud, (self.pos[0]+self.mouse_coords_font_size//2,self.pos[1]-self.mouse_coords_font_size-2))
 
     def obj_name(self, screen, camera):    
         for obj in self.objects:
             if obj.obj_type != 'Sputnik':
                 planet_name = self.fnt.render(obj.name, 1, (130, 130, 130))
-                screen.blit(planet_name, ((obj.x + obj.radius) * camera.e - camera.x, (obj.y - obj.radius) * camera.e - camera.y))
-        
+                screen.blit(planet_name, ((obj.x + obj.radius) * camera.e - camera.Ox, (obj.y - obj.radius) * camera.e - camera.Oy))
+                
+    def obj_trace(self, screen, camera):
+        for obj in self.objects:
+            if obj.obj_type != 'Sputnik':
+                obj.positions.append((obj.x, obj.y))
+                if len(obj.positions) < 5000:
+                    for i in range(1, len(obj.positions), 100):
+                        x1, y1 = obj.positions[i-1]
+                        x1 = x1 * camera.e - camera.Ox
+                        y1 = y1 * camera.e - camera.Oy
+                        pg.draw.line(screen, (100, 100, 100), (x1, y1), (x1, y1), 1)
+        else:
+            del obj.positions[:100]
+                
+                
+                
     def obj_menu(self, screen, camera):
         for obj in self.objects:
             if obj.selected:

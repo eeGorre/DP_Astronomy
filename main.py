@@ -60,7 +60,7 @@ class Programm:
             self.astronomy.level(self.screen, self.camera, self.delta_time, mouse_S, event)
             
             self.interface.show_fps(self.clock)
-            # self.interface.mouse_coords(self.camera, self.screen)
+            self.interface.mouse_coords(self.camera, self.screen)
             self.interface.time(self.time_k, self.screen)
 
             

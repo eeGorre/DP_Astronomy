@@ -199,7 +199,7 @@ class Astronomy:
                         self.Jupiter, self.Uranus, self.Neptune, self.Triton, self.Europa, self.Ganymede,
                         self.Io, self.Callisto]
         
-        # self.astro_interface = Astro_Interface(self.objects)
+        self.astro_interface = Astro_Interface(self.objects)
         self.physics = Physics(self.objects)
         
     def level(self, screen, camera, delta_time, mouse_pos, event):
@@ -212,8 +212,8 @@ class Astronomy:
         if event.type == pg.MOUSEBUTTONDOWN: 
             if event.button == 3:
                 new_object = AstroObjects(
-                    (mouse_pos[0] + camera.x) / camera.e,
-                    (mouse_pos[1] + camera.y) / camera.e,
+                    (mouse_pos[0] + camera.Ox) / camera.e,
+                    (mouse_pos[1] + camera.Oy) / camera.e,
                     'Gleboid',
                     1.3 * 10**22,
                     0, 0,
@@ -227,5 +227,6 @@ class Astronomy:
         for obj in self.objects:
             obj.render(screen, camera, mouse_pos, event)
             
-        # self.astro_interface.obj_name(screen, camera)
-        # self.astro_interface.obj_menu(screen, camera)
+        self.astro_interface.obj_name(screen, camera)
+        self.astro_interface.obj_menu(screen, camera)
+        # self.astro_interface.obj_trace(screen, camera)

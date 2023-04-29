@@ -68,7 +68,7 @@ class Interface:
     def mouse_coords(self, camera, screen):
         AU = 150*10**9
         self.pos = pg.mouse.get_pos()
-        mouse_coords_hud = self.fnt.render(f'{"{:.1f}".format(round(((0 + camera.x)+self.pos[0])/camera.e, 1)/AU), "{:.1f}".format(-round(((0 + camera.y) + self.pos[1])/camera.e, 1)/AU)}', 1, (150, 150, 150))
+        mouse_coords_hud = self.fnt.render(f'{"{:.1f}".format(round(((0 + camera.Ox)+self.pos[0])/camera.e, 1)/AU), "{:.1f}".format(-round(((0 + camera.Oy) + self.pos[1])/camera.e, 1)/AU)}', 1, (150, 150, 150))
         screen.blit(mouse_coords_hud, (self.pos[0]+self.mouse_coords_font_size//2,self.pos[1]-self.mouse_coords_font_size-2))
         
     def show_fps(self, clock):
