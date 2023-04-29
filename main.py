@@ -1,5 +1,5 @@
 import pygame as pg
-from pygame.locals import DOUBLEBUF, FULLSCREEN
+from pygame.locals import DOUBLEBUF, FULLSCREEN, OPENGL
 from settings import WIN_WIDTH, WIN_HEIGHT, FPS
 from camera import Camera
 from interface import Interface

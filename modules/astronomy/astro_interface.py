@@ -16,13 +16,13 @@ class Astro_Interface:
 
     def obj_name(self, screen, camera):    
         for obj in self.objects:
-            planet_name = self.fnt.render(obj.name, 1, (130, 130, 130))
-            screen.blit(planet_name, ((obj.x + obj.radius) * camera.e - camera.x, (obj.y - obj.radius) * camera.e - camera.y))
+            if obj.obj_type != 'Sputnik':
+                planet_name = self.fnt.render(obj.name, 1, (130, 130, 130))
+                screen.blit(planet_name, ((obj.x + obj.radius) * camera.e - camera.x, (obj.y - obj.radius) * camera.e - camera.y))
         
     def obj_menu(self, screen, camera):
         for obj in self.objects:
             if obj.selected:
-                camera.obj_selected = True
                 pg.draw.rect(screen, (0, 0, 0), (WIN_WIDTH*0.78, 0, WIN_WIDTH, WIN_HEIGHT))
                 pg.draw.line(screen, (70, 70, 70), [WIN_WIDTH*0.78, WIN_HEIGHT], [WIN_WIDTH*0.78, 0], 2)
                 pg.draw.line(screen, (40, 40, 40), [WIN_WIDTH*0.78, WIN_HEIGHT*0.05], [WIN_WIDTH, WIN_HEIGHT*0.05], 1)
@@ -44,7 +44,7 @@ class Astro_Interface:
                 pg.draw.line(screen, (40, 40, 40), [WIN_WIDTH*0.78, WIN_HEIGHT*0.6], [WIN_WIDTH, WIN_HEIGHT*0.6], 1)
                 
                 obj_radius = self.fnt2.render(f'Радиус: {obj.radius//1000} км', 1, (135, 135, 135))
-                obj_mass = self.fnt2.render(f'Масса: {int(obj.m//1_000_000_000)} килотон', 1, (135, 135, 135))
+                obj_mass = self.fnt2.render(f'Масса: {int(obj.m//1_000_000_000_000_000)} гигатонн', 1, (135, 135, 135))
                 obj_temperature = self.fnt2.render(f'Температура: TBA', 1, (135, 135, 135))
                 obj_density = self.fnt2.render(f'Плотность: TBA', 1, (135, 135, 135))
                 obj_age = self.fnt2.render(f'Возраст: TBA', 1, (135, 135, 135))

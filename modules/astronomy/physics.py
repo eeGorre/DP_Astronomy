@@ -33,15 +33,15 @@ class Physics:
                             if obj1.m >= obj2.m:
                                 obj1.m += obj2.m
                                 obj1.radius = (obj1.radius**2+obj2.radius**2)**(0.5)
-                                obj1.vx = (obj1.m*obj1.vx+obj2.m*obj2.vx)/(obj1.m+obj2.m) + fx * delta_time / obj2.m 
-                                obj1.vy = (obj1.m*obj1.vy+obj2.m*obj2.vy)/(obj1.m+obj2.m) + fy * delta_time / obj2.m
+                                obj1.vx = (obj1.m*obj1.vx+obj2.m*obj2.vx)/(obj1.m+obj2.m)
+                                obj1.vy = (obj1.m*obj1.vy+obj2.m*obj2.vy)/(obj1.m+obj2.m)
                                 self.objects.remove(obj2)
 
                             if obj2.m > obj1.m:
                                 obj2.m += obj1.m
                                 obj2.radius = (obj2.radius**2+obj1.radius**2)**(0.5)
-                                obj2.vx = (obj2.m*obj2.vx+obj1.m*obj1.vx)/(obj2.m+obj1.m) + fx * delta_time / obj1.m 
-                                obj2.vy = (obj2.m*obj2.vy+obj1.m*obj1.vy)/(obj2.m+obj1.m) + fy * delta_time / obj1.m 
+                                obj2.vx = (obj2.m*obj2.vx+obj1.m*obj1.vx)/(obj2.m+obj1.m)
+                                obj2.vy = (obj2.m*obj2.vy+obj1.m*obj1.vy)/(obj2.m+obj1.m)
                                 self.objects.remove(obj1)  
                             
    
