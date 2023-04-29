@@ -7,7 +7,7 @@ from modules.astronomy.astronomy import Astronomy
 
 pg.mixer.init()
 pg.mixer.music.load('OST/Unofficial/FasterThanLight.mp3')
-pg.mixer.music.play()
+pg.mixer.music.play(-1)
 
 
 class Programm:

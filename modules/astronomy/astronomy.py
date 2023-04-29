@@ -1,17 +1,20 @@
 from modules.astronomy.astro_objects import AstroObjects
 from modules.astronomy.physics import Physics
 from modules.astronomy.astro_interface import Astro_Interface
+from settings import WIN_WIDTH, WIN_HEIGHT
 import pygame as pg
 from math import sqrt
 import random
 
-bg = pg.image.load('bg.png')
+
 
 class Astronomy:
     def __init__(self):
         self.G = 6.67 * (10**-11) # Гравитационная постоянная в СИ
         self.AU = 150*10**9 # Астрономическая единица в CИ
-        self.LY = 63_241.077
+        self.LY = 63_241.077*self.AU
+        
+        self.bg = pg.image.load('bg.png')
         
         self.Sun = AstroObjects(0,
                                 0,
@@ -200,7 +203,8 @@ class Astronomy:
         self.physics = Physics(self.objects)
         
     def level(self, screen, camera, delta_time, mouse_pos, event):
-        screen.blit(bg, (0, 0)) 
+        self.bg = pg.transform.scale(self.bg, (WIN_WIDTH, WIN_HEIGHT))
+        screen.blit(self.bg, (0, 0)) 
         
         self.physics.move(delta_time, camera)
         
