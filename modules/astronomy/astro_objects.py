@@ -30,19 +30,19 @@ class AstroObjects:
             radius = self.radius*camera.e
             
         pg.draw.circle(screen, self.color,
-                       (self.x*camera.e - camera.x, self.y*camera.e - camera.y),
+                       (self.x*camera.e - camera.Ox, self.y*camera.e - camera.Oy),
                        (radius))
 
         if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-            if (self.x*camera.e - camera.x) - 100 <= mouse_pos[0] <= (self.x*camera.e - camera.x) + (radius * 2) * 2 and (self.y*camera.e - camera.y) - 100 <= mouse_pos[1] <= (self.y*camera.e - camera.y) + (radius * 2) * 2:
+            if (self.x*camera.e - camera.Ox) - 100 <= mouse_pos[0] <= (self.x*camera.e - camera.Ox) + (radius * 2) * 2 and (self.y*camera.e - camera.Oy) - 100 <= mouse_pos[1] <= (self.y*camera.e - camera.Oy) + (radius * 2) * 2:
                 self.selected = True
                 pg.time.wait(200)
             else:
                 self.selected = False
             
         if self.selected:
-            camera.x = (self.x*camera.e - WIN_WIDTH // 2)
-            camera.y = (self.y*camera.e - WIN_HEIGHT // 2)        
+            camera.Ox = (self.x*camera.e - WIN_WIDTH // 2)
+            camera.Oy = (self.y*camera.e - WIN_HEIGHT // 2)        
         
         self.draw_trajectory(screen, camera, self.trace)
         
@@ -51,8 +51,8 @@ class AstroObjects:
         if len(self.trace) < 5000:
             for i in range(1, len(positions), 100):
                 x1, y1 = positions[i-1]
-                x1 = x1 * camera.e - camera.x
-                y1 = y1 * camera.e - camera.y
+                x1 = x1 * camera.e - camera.Ox
+                y1 = y1 * camera.e - camera.Oy
                 pg.draw.circle(screen, (60, 60, 60), (x1, y1), 1)
         else:
             del self.trace[:100]

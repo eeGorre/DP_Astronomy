@@ -199,7 +199,7 @@ class Astronomy:
                         self.Jupiter, self.Uranus, self.Neptune, self.Triton, self.Europa, self.Ganymede,
                         self.Io, self.Callisto]
         
-        self.astro_interface = Astro_Interface(self.objects)
+        # self.astro_interface = Astro_Interface(self.objects)
         self.physics = Physics(self.objects)
         
     def level(self, screen, camera, delta_time, mouse_pos, event):
@@ -227,5 +227,5 @@ class Astronomy:
         for obj in self.objects:
             obj.render(screen, camera, mouse_pos, event)
             
-        self.astro_interface.obj_name(screen, camera)
-        self.astro_interface.obj_menu(screen, camera)
+        # self.astro_interface.obj_name(screen, camera)
+        # self.astro_interface.obj_menu(screen, camera)

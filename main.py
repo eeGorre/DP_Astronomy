@@ -29,10 +29,10 @@ class Programm:
                 if event.type == pg.QUIT:
                     pg.quit()
 
-                mouse_pos = pg.mouse.get_pos()
+                mouse_S = pg.mouse.get_pos() # Позиция курсора на экране (S = Screen)
                 keys = pg.key.get_pressed()    
                 self.interface.handler(event, self.clock)
-                self.camera.zoom(event, keys, mouse_pos)    
+                self.camera.zoom(event, keys, mouse_S)    
                 
                 if event.type == pg.KEYDOWN and event.key == pg.K_p:
                     self.pause = not self.pause
@@ -50,17 +50,17 @@ class Programm:
             
             
                                    
-            mouse_rel_pos = list(pg.mouse.get_rel())
+            mouse_shift = list(pg.mouse.get_rel())
             
-            self.camera.move(mouse_rel_pos)                               
+            self.camera.move(mouse_shift)                               
             self.clock.tick(FPS)   
             
             self.delta_time = self.clock.get_time() * self.time_k
             
-            self.astronomy.level(self.screen, self.camera, self.delta_time, mouse_pos, event)
+            self.astronomy.level(self.screen, self.camera, self.delta_time, mouse_S, event)
             
             self.interface.show_fps(self.clock)
-            self.interface.mouse_coords(self.camera, self.screen)
+            # self.interface.mouse_coords(self.camera, self.screen)
             self.interface.time(self.time_k, self.screen)
 
             
