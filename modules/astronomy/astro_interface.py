@@ -50,7 +50,7 @@ class Astro_Interface:
                 obj_age = self.fnt2.render(f'Возраст: TBA', 1, (135, 135, 135))
                 obj_luminosity = self.fnt2.render(f'Светимость TBA', 1, (135, 135, 135))
                 obj_rotation_period = self.fnt2.render(f'Период вращения: TBA', 1, (135, 135, 135))
-                obj_speed = self.fnt2.render(f'Скорость: {round((obj.vx**2 + obj.vy**2)**0.5, 2)}', 1, (135, 135, 135))
+                obj_speed = self.fnt2.render(f'Скорость: {round(((obj.vx**2 + obj.vy**2)**0.5)/1000, 3)} км/c', 1, (135, 135, 135))
                 
                 screen.blit(obj_radius, (WIN_WIDTH*0.79, WIN_HEIGHT*0.23))
                 screen.blit(obj_mass, (WIN_WIDTH*0.79, WIN_HEIGHT*0.265))
@@ -60,5 +60,4 @@ class Astro_Interface:
                 screen.blit(obj_luminosity, (WIN_WIDTH*0.79, WIN_HEIGHT*0.405))
                 screen.blit(obj_rotation_period, (WIN_WIDTH*0.79, WIN_HEIGHT*0.440))
                 screen.blit(obj_speed, (WIN_WIDTH*0.79, WIN_HEIGHT*0.475))
-            else:
-                camera.obj_selected = False
+                

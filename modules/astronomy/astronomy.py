@@ -11,7 +11,8 @@ class Astronomy:
     def __init__(self):
         self.G = 6.67 * (10**-11) # Гравитационная постоянная в СИ
         self.AU = 150*10**9 # Астрономическая единица в CИ
-
+        self.LY = 63_241.077
+        
         self.Sun = AstroObjects(0,
                                 0,
                                 "Sun",
@@ -204,18 +205,20 @@ class Astronomy:
         self.physics.move(delta_time, camera)
         
         self.pos = pg.mouse.get_pos()
-        if event.type == pg.MOUSEBUTTONDOWN and event.button == 3: 
-            new_object = AstroObjects(
-                self.pos[0] * self.AU,
-                self.pos[1] * self.AU,
-                'Gleboid',
-                1.3 * 10**22,
-                0, 0,
-                1_185_000,
-                'Asteroid',
-                (0, 200, 0)
-            )
-            self.objects.append(new_object)
+        if event.type == pg.MOUSEBUTTONDOWN: 
+            if event.button == 3:
+                new_object = AstroObjects(
+                    (mouse_pos[0] + camera.x) / camera.e,
+                    (mouse_pos[1] + camera.y) / camera.e,
+                    'Gleboid',
+                    1.3 * 10**22,
+                    0, 0,
+                    1_188_000,
+                    'Asteroid',
+                    (0, 200, 0)
+                )
+                self.objects.append(new_object)
+                pg.time.wait(75)
         
         for obj in self.objects:
             obj.render(screen, camera, mouse_pos, event)

@@ -6,7 +6,6 @@ class Camera:
         self.e = 0.000000002
         self.x = -WIN_WIDTH // 2
         self.y = -WIN_HEIGHT // 2
-        self.obj_selected = False
         
     def move(self, mouse_rel_pos):
         if pg.mouse.get_pressed()[0]:
@@ -24,13 +23,10 @@ class Camera:
         if event.type == pg.MOUSEBUTTONDOWN and not keys[pg.K_t]:
             if event.button == 4:
                 self.e *= 1.0625
-                if self.obj_selected == False:
-                    self.x = x_pos - WIN_WIDTH // 2
-                    self.y = y_pos - WIN_HEIGHT // 2
+                self.x = x_pos - WIN_WIDTH // 2
+                self.y = y_pos - WIN_HEIGHT // 2
                 
             if event.button == 5:
                 self.e /= 1.0625
-                if self.obj_selected == False:
-                    self.x = x_pos - WIN_WIDTH // 2
-                    self.y = y_pos - WIN_HEIGHT // 2
-                    
+                self.x = x_pos - WIN_WIDTH // 2
+                self.y = y_pos - WIN_HEIGHT // 2
