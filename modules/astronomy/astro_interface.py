@@ -80,7 +80,3 @@ class Astro_Interface:
                 screen.blit(obj_rotation_period, (WIN_WIDTH*0.79, WIN_HEIGHT*0.440))
                 screen.blit(obj_speed, (WIN_WIDTH*0.79, WIN_HEIGHT*0.475))
                 
-                print(self.hide)
-                
-    
-                

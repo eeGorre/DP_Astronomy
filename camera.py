@@ -20,6 +20,7 @@ class Camera:
             self.Ox = -WIN_WIDTH // 2
             self.Oy = -WIN_HEIGHT // 2
         
+        t = 0.05
         if event.type == pg.MOUSEBUTTONDOWN and not keys[pg.K_t]:
             self.m_wx = (mouse_S[0] + self.Ox) / self.e  #позиция мыши в мире W = S + O
             self.m_wy = (mouse_S[1] + self.Oy) / self.e
