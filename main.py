@@ -47,24 +47,15 @@ class Programm:
                         self.time_k *= 1.03125
                     if event.button == 5:
                         self.time_k /= 1.03125
-            
-            
-                                   
+                                      
             mouse_shift = list(pg.mouse.get_rel())
-            
+            self.delta_time = self.clock.get_time() * self.time_k
             self.camera.move(mouse_shift)                               
             self.clock.tick(FPS)   
-            
-            self.delta_time = self.clock.get_time() * self.time_k
-            
-            self.astronomy.level(self.screen, self.camera, self.delta_time, mouse_S, event)
-            
+            self.astronomy.level(self.screen, self.camera, self.delta_time, mouse_S, event, keys)
             self.interface.show_fps(self.clock)
             self.interface.mouse_coords(self.camera, self.screen)
             self.interface.time(self.time_k, self.screen)
-
-            
-            
             pg.display.update()
             
 if __name__ == '__main__':

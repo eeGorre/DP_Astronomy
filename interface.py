@@ -1,7 +1,7 @@
 import pygame as pg
 from settings import WIN_WIDTH, WIN_HEIGHT
 import time
-from handler import process_input_text
+from keyboard import process_input_text
 
 
 class Interface:
@@ -68,7 +68,7 @@ class Interface:
     def mouse_coords(self, camera, screen):
         AU = 150*10**9
         self.pos = pg.mouse.get_pos()
-        mouse_coords_hud = self.fnt.render(f'{"{:.1f}".format(round(((0 + camera.Ox)+self.pos[0])/camera.e, 1)/AU), "{:.1f}".format(-round(((0 + camera.Oy) + self.pos[1])/camera.e, 1)/AU)}', 1, (150, 150, 150))
+        mouse_coords_hud = self.fnt.render(f'{round(((0 + camera.Ox)+self.pos[0])/camera.e, 1)/AU:.1f}, {-round(((0 + camera.Oy) + self.pos[1])/camera.e, 1)/AU:.1f}', 1, (150, 150, 150))
         screen.blit(mouse_coords_hud, (self.pos[0]+self.mouse_coords_font_size//2,self.pos[1]-self.mouse_coords_font_size-2))
         
     def show_fps(self, clock):

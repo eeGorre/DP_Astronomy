@@ -202,7 +202,7 @@ class Astronomy:
         self.astro_interface = Astro_Interface(self.objects)
         self.physics = Physics(self.objects)
         
-    def level(self, screen, camera, delta_time, mouse_pos, event):
+    def level(self, screen, camera, delta_time, mouse_pos, event, keys):
         self.bg = pg.transform.scale(self.bg, (WIN_WIDTH, WIN_HEIGHT))
         screen.blit(self.bg, (0, 0)) 
         
@@ -226,7 +226,11 @@ class Astronomy:
         
         for obj in self.objects:
             obj.render(screen, camera, mouse_pos, event)
+        
+        if keys[pg.K_h]:
+            pg.time.wait(150)
+            self.astro_interface.hide = not self.astro_interface.hide
             
         self.astro_interface.obj_name(screen, camera)
         self.astro_interface.obj_menu(screen, camera)
-        # self.astro_interface.obj_trace(screen, camera)
+        self.astro_interface.obj_trace(screen, camera)

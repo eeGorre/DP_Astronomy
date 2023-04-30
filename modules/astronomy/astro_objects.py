@@ -44,16 +44,16 @@ class AstroObjects:
             camera.Ox = (self.x*camera.e - WIN_WIDTH // 2)
             camera.Oy = (self.y*camera.e - WIN_HEIGHT // 2)        
         
-        self.draw_trajectory(screen, camera, self.trace)
+    #     self.draw_trajectory(screen, camera, self.trace)
         
-    def draw_trajectory(self, screen, camera, positions):
-        self.trace.append((self.x, self.y))
-        if len(self.trace) < 5000:
-            for i in range(1, len(positions), 100):
-                x1, y1 = positions[i-1]
-                x1 = x1 * camera.e - camera.Ox
-                y1 = y1 * camera.e - camera.Oy
-                pg.draw.circle(screen, (60, 60, 60), (x1, y1), 1)
-        else:
-            del self.trace[:100]
+    # def draw_trajectory(self, screen, camera, positions):
+    #     self.trace.append((self.x, self.y))
+    #     if len(self.trace) < 5000:
+    #         for i in range(1, len(positions), 100):
+    #             x1, y1 = positions[i-1]
+    #             x1 = x1 * camera.e - camera.Ox
+    #             y1 = y1 * camera.e - camera.Oy
+    #             pg.draw.line(screen, (60, 60, 60), (x1, y1), (x1, y1), 1)
+    #     else:
+    #         del self.trace[:100]
             
