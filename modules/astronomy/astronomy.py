@@ -216,11 +216,11 @@ class Astronomy:
                     (mouse_pos[0] + camera.Ox) / camera.e,
                     (mouse_pos[1] + camera.Oy) / camera.e,
                     'Gleboid',
-                    1.3 * 10**22,
+                    4*10**30,
                     0, 0,
-                    1_188_000,
+                    1,
                     'Asteroid',
-                    (0, 200, 0)
+                    (0, 0, 0)
                 )
                 self.objects.append(new_object)
                 pg.time.wait(75)

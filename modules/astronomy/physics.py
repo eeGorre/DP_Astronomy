@@ -12,6 +12,7 @@ class Physics:
                 for j in range(i+1, len(self.objects)):
                     objA = self.objects[i]
                     objB = self.objects[j]
+                    
                     if objA.m != 0 and objB.m != 0:
                         # Вычисляем расстояние между планетами
                         r = (((objB.x - objA.x) ** 2 + (objB.y - objA.y) ** 2) ** 0.5)
