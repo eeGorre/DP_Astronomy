@@ -5,10 +5,10 @@ from camera import Camera
 from interface import Interface
 from modules.astronomy.astronomy import Astronomy
 
+
 pg.mixer.init()
 pg.mixer.music.load('OST/Unofficial/FasterThanLight.mp3')
 pg.mixer.music.play(-1)
-
 
 class Programm:
     def __init__(self):
@@ -20,7 +20,7 @@ class Programm:
         self.camera = Camera()
         self.interface = Interface() 
         self.pause = False
-        self.time_k = 100
+        self.time_k = 200
         self.time_k_saved = self.time_k
     
     def run(self):
@@ -34,7 +34,7 @@ class Programm:
                 self.interface.handler(event, self.clock)
                 self.camera.zoom(event, keys, mouse_S)    
                 
-                if event.type == pg.KEYDOWN and event.key == pg.K_p:
+                if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
                     self.pause = not self.pause
                     if self.pause:
                         self.time_k_saved = self.time_k
@@ -43,10 +43,12 @@ class Programm:
                         self.time_k = self.time_k_saved
                     
                 if event.type == pg.MOUSEBUTTONDOWN and keys[pg.K_t]:
-                    if event.button == 4:
-                        self.time_k *= 1.03125
-                    if event.button == 5:
-                        self.time_k /= 1.03125
+                    if 2591999 >= self.time_k * 1000:
+                        if event.button == 4:
+                            self.time_k *= 1.03125
+                    if self.time_k * 1000 > 1:
+                        if event.button == 5:
+                            self.time_k /= 1.03125
                                       
             mouse_shift = list(pg.mouse.get_rel())
             self.delta_time = self.clock.get_time() * self.time_k

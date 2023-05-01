@@ -37,7 +37,7 @@ class Astronomy:
         self.Venus = AstroObjects(0.71*self.AU,
                                     0,
                                     "Venus",
-                                    4.9*10**24, 
+                                    4.8675*10**24, 
                                     0, sqrt(self.G*self.Sun.m / (0.71*self.AU)), 
                                     6_051_500,
                                     'Planet',
@@ -57,8 +57,8 @@ class Astronomy:
                                  "Moon",
                                  7.3*10**22,
                                  0, sqrt(self.G*self.Sun.m / self.AU) + sqrt(self.G*self.Earth.m / 385_000_000),
-                                 1737*10**3,
-                                 'Sputnik',
+                                 1_737_100,
+                                 None,
                                  (120,120,120))
 
         self.Mars = AstroObjects(1.55 * self.AU,
@@ -86,7 +86,7 @@ class Astronomy:
                                     0, sqrt(self.G*self.Sun.m / (5.2 * self.AU)), 
                                     69_911_000,
                                     'Planet',
-                                    (250, 215, 120))
+                                    (235, 155, 95))
 
         self.Ganymede = AstroObjects(5.2 * self.AU + 1_070_400_000,
                                     0,
@@ -94,7 +94,7 @@ class Astronomy:
                                     1.48*10**23, 
                                     0, sqrt(self.G*self.Sun.m / (5.2 * self.AU)) + sqrt(self.G*self.Jupiter.m / 1_070_400_000), 
                                     2_634_000,
-                                    'Sputnik',
+                                    'Satellite',
                                     (215, 215, 175))
         
         self.Callisto = AstroObjects(5.2 * self.AU + 1_882_709_000,
@@ -103,7 +103,7 @@ class Astronomy:
                                     1.1*10**23, 
                                     0, sqrt(self.G*self.Sun.m / (5.2 * self.AU)) + sqrt(self.G*self.Jupiter.m / 1_882_709_000), 
                                     4_821_000,
-                                    'Sputnik',
+                                    'Satellite',
                                     (95, 150, 135)) 
 
         self.Io = AstroObjects(5.2 * self.AU - 421_700_000 ,
@@ -112,7 +112,7 @@ class Astronomy:
                                     8.9*10**22, 
                                     0, sqrt(self.G*self.Sun.m / (5.2 * self.AU)) + sqrt(self.G*self.Jupiter.m / 421_700_000), 
                                     3_643_000,
-                                    'Sputnik',
+                                    'Satellite',
                                     (245, 235, 130))
         
         self.Europa = AstroObjects(5.2 * self.AU - 671_034_000,
@@ -121,7 +121,7 @@ class Astronomy:
                                     4.8*10**22,
                                     0, sqrt(self.G*self.Sun.m / (5.2 * self.AU)) + sqrt(self.G*self.Jupiter.m / 671_034_000), 
                                     3_122_000,
-                                    'Sputnik',
+                                    'Satellite',
                                     (165, 175, 140))
         
         self.Saturn = AstroObjects(9.55 * self.AU,
@@ -131,7 +131,7 @@ class Astronomy:
                                     0, sqrt(self.G*self.Sun.m / (9.55 * self.AU)), 
                                     58_232_000,
                                     'Planet',
-                                    (235, 155, 95))
+                                    (250, 215, 120))
         
         self.Uranus = AstroObjects(19.22 * self.AU,
                                     0,
@@ -157,7 +157,7 @@ class Astronomy:
                                    2.14*10**22,
                                    0, sqrt(self.G*self.Sun.m / (30 * self.AU)) + sqrt(6.67 * (10**-11)*self.Neptune.m / 354_760_000),
                                    1_353_400, 
-                                   'Sputnik',
+                                   'Satellite',
                                    (255, 210, 210))
         
         '''
@@ -196,7 +196,7 @@ class Astronomy:
         
         
         self.objects = [self.Sun,self.Mercury, self.Venus, self.Earth, self.Moon, self.Ceres, self.Mars,
-                        self.Jupiter, self.Uranus, self.Neptune, self.Triton, self.Europa, self.Ganymede,
+                        self.Jupiter, self.Saturn, self.Uranus, self.Neptune, self.Triton, self.Europa, self.Ganymede,
                         self.Io, self.Callisto]
         
         self.astro_interface = Astro_Interface(self.objects)
@@ -207,6 +207,7 @@ class Astronomy:
         screen.blit(self.bg, (0, 0)) 
         
         self.physics.move(delta_time, camera)
+        self.physics.satelliteDetection()
         
         self.pos = pg.mouse.get_pos()
         if event.type == pg.MOUSEBUTTONDOWN: 
@@ -232,5 +233,5 @@ class Astronomy:
             self.astro_interface.hide = not self.astro_interface.hide
             
         self.astro_interface.obj_name(screen, camera)
-        self.astro_interface.obj_menu(screen, camera)
+        self.astro_interface.obj_menu(screen, self.G)
         self.astro_interface.obj_trace(screen, camera)

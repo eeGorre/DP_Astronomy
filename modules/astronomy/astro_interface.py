@@ -1,6 +1,6 @@
 import pygame as pg
 from settings import WIN_HEIGHT, WIN_WIDTH
-from math import sqrt
+from math import sqrt, pi
 
 class Astro_Interface:
     def __init__(self, obj):
@@ -9,9 +9,8 @@ class Astro_Interface:
         self.fnt2 = pg.font.SysFont('Arial', 15)
         self.fnt3 = pg.font.SysFont('Arial', 18)
         self.hide = False
-
-    def mouse_coords(self, camera, screen):
         
+    def mouse_coords(self, camera, screen):
         self.pos = pg.mouse.get_pos()
         mouse_coords_hud = self.fnt.render(f'{round(((0 + camera.Ox)+self.pos[0])/camera.e, 2), -round(((0 + camera.Oy) + self.pos[1])/camera.e, 2)}', 1, (200, 200, 200))
         screen.blit(mouse_coords_hud, (self.pos[0]+self.mouse_coords_font_size//2,self.pos[1]-self.mouse_coords_font_size-2))
@@ -37,11 +36,9 @@ class Astro_Interface:
                     else:
                         del obj.trace[:100]
                 
-                
-                
-    def obj_menu(self, screen, camera):
+    def obj_menu(self, screen, G):
         for obj in self.objects:
-            if obj.selected:
+            if obj.selected:          
                 pg.draw.rect(screen, (0, 0, 0), (WIN_WIDTH*0.78, 0, WIN_WIDTH, WIN_HEIGHT))
                 pg.draw.line(screen, (70, 70, 70), [WIN_WIDTH*0.78, WIN_HEIGHT], [WIN_WIDTH*0.78, 0], 2)
                 pg.draw.line(screen, (40, 40, 40), [WIN_WIDTH*0.78, WIN_HEIGHT*0.05], [WIN_WIDTH, WIN_HEIGHT*0.05], 1)
@@ -62,21 +59,27 @@ class Astro_Interface:
                 
                 pg.draw.line(screen, (40, 40, 40), [WIN_WIDTH*0.78, WIN_HEIGHT*0.6], [WIN_WIDTH, WIN_HEIGHT*0.6], 1)
                 
-                obj_radius = self.fnt2.render(f'Радиус: {obj.radius//1000} км', 1, (135, 135, 135))
-                obj_mass = self.fnt2.render(f'Масса: {int(obj.m//1_000_000_000_000_000)} гигатонн', 1, (135, 135, 135))
-                obj_temperature = self.fnt2.render(f'Температура: TBA', 1, (135, 135, 135))
-                obj_density = self.fnt2.render(f'Плотность: TBA', 1, (135, 135, 135))
-                obj_age = self.fnt2.render(f'Возраст: TBA', 1, (135, 135, 135))
-                obj_luminosity = self.fnt2.render(f'Светимость TBA', 1, (135, 135, 135))
-                obj_rotation_period = self.fnt2.render(f'Период вращения: TBA', 1, (135, 135, 135))
-                obj_speed = self.fnt2.render(f'Скорость: {round(((obj.vx**2 + obj.vy**2)**0.5)/1000, 3)} км/c', 1, (135, 135, 135))
-                
+                obj_radius = self.fnt2.render(f'Радиус: {int(obj.radius/1000)} км', 1, (135, 135, 135))
+                obj_mass = self.fnt2.render(f'Масса: {obj.m:.2e} кг', 1, (135, 135, 135))
+                obj_rotation_period = self.fnt2.render('TBA', 1, (135, 135, 135))
+                obj_speed = self.fnt2.render(f'Скорость: {round((sqrt(obj.vx**2 + obj.vy**2))/1000, 3)} км/c', 1, (135, 135, 135))
+                obj_fcv = self.fnt2.render(f'Первая космическая: {round(obj.fcv/1000, 2)} км/с', 1, (135, 135, 135))
+                obj_scv = self.fnt2.render(f'Вторая космическая: {round(obj.scv/1000, 2)} км/c', 1, (135, 135, 135))
+                obj_type = self.fnt2.render(f'Класс объекта: {obj.obj_type}', 1, (135, 135, 135))
+                # obj_temperature = self.fnt2.render(f'Температура: TBA', 1, (135, 135, 135))
+                # obj_density = self.fnt2.render(f'Плотность: TBA', 1, (135, 135, 135))
+                # obj_age = self.fnt2.render(f'Возраст: TBA', 1, (135, 135, 135))
+                # obj_luminosity = self.fnt2.render(f'Светимость TBA', 1, (135, 135, 135))
                 screen.blit(obj_radius, (WIN_WIDTH*0.79, WIN_HEIGHT*0.23))
                 screen.blit(obj_mass, (WIN_WIDTH*0.79, WIN_HEIGHT*0.265))
-                screen.blit(obj_temperature, (WIN_WIDTH*0.79, WIN_HEIGHT*0.3))
-                screen.blit(obj_density, (WIN_WIDTH*0.79, WIN_HEIGHT*0.335))
-                screen.blit(obj_age, (WIN_WIDTH*0.79, WIN_HEIGHT*0.37))
-                screen.blit(obj_luminosity, (WIN_WIDTH*0.79, WIN_HEIGHT*0.405))
-                screen.blit(obj_rotation_period, (WIN_WIDTH*0.79, WIN_HEIGHT*0.440))
-                screen.blit(obj_speed, (WIN_WIDTH*0.79, WIN_HEIGHT*0.475))
+                screen.blit(obj_rotation_period, (WIN_WIDTH*0.79, WIN_HEIGHT*0.3))
+                screen.blit(obj_speed, (WIN_WIDTH*0.79, WIN_HEIGHT*0.335))
+                screen.blit(obj_fcv, (WIN_WIDTH*0.79, WIN_HEIGHT*0.37))
+                screen.blit(obj_scv, (WIN_WIDTH*0.79, WIN_HEIGHT*0.405))
+                screen.blit(obj_type, (WIN_WIDTH*0.79, WIN_HEIGHT*0.440))
+                # screen.blit(obj_temperature, (WIN_WIDTH*0.79, WIN_HEIGHT*0.3))
+                # screen.blit(obj_density, (WIN_WIDTH*0.79, WIN_HEIGHT*0.335))
+                # screen.blit(obj_age, (WIN_WIDTH*0.79, WIN_HEIGHT*0.37))
+                # screen.blit(obj_luminosity, (WIN_WIDTH*0.79, WIN_HEIGHT*0.405))
+                
                 

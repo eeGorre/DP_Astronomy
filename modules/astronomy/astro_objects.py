@@ -1,6 +1,6 @@
 import pygame as pg
 from settings import WIN_HEIGHT, WIN_WIDTH
-
+from math import sqrt
 
 class AstroObjects:
     def __init__(self, x, y, name, m, vx, vy, radius, obj_type, color):
@@ -14,18 +14,24 @@ class AstroObjects:
         self.trace = []
         self.color = color
         self.selected = False
+        self.parent = None
         self.obj_type = obj_type
+        self.G = 6.67 * (10**-11)
+        self.fcv = sqrt(self.G*(self.m/self.radius))
+        self.scv = sqrt(2) * (sqrt(self.G*(self.m/self.radius)))
         
         
     def render(self, screen, camera, mouse_pos, event):
         if self.radius*camera.e <= 3:
             if self.obj_type == 'Star':
-                radius = 4
-            if self.obj_type == 'Planet':
                 radius = 3
-            if self.obj_type == 'Sputnik':
+            if self.obj_type == 'Planet':
                 radius = 2
+            if self.obj_type == 'Satellite':
+                radius = 1
             if self.obj_type == 'Asteroid':
+                radius = 1
+            if self.obj_type == None:
                 radius = 1
         else:
             radius = self.radius*camera.e
@@ -44,7 +50,15 @@ class AstroObjects:
         if self.selected:
             if self.selected:
                 target_pos = (self.x*camera.e - WIN_WIDTH // 2, self.y*camera.e - WIN_HEIGHT // 2)
-                t = 0.025  # можно изменять значение для изменения скорости анимации
+                t = 0.03  # можно изменять значение для изменения скорости анимации
                 current_pos = (camera.Ox, camera.Oy)
                 new_pos = tuple((1 - t) * current + t * target for current, target in zip(current_pos, target_pos))
-                camera.Ox, camera.Oy = new_pos   
+                camera.Ox, camera.Oy = new_pos  
+                
+    def isSatellite(self):
+        if self.parent is None:
+            return False
+        elif self.parent.obj_type == "Planet":
+            return True
+        else:
+            return False

@@ -1,4 +1,4 @@
 WIN_WIDTH =  int(1920 * 0.7)
 WIN_HEIGHT = int(1080 * 0.7)
 
-FPS = 300
+FPS = 144

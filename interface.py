@@ -47,7 +47,7 @@ class Interface:
         self.show = 1
         self.hud_selected = 1
         self.switched = 1
-        
+
         self.menu = pg.image.load("assets/CameraMenu.png").convert_alpha()
         self.object_hud1 = pg.image.load("assets/ObjectHud1.png").convert_alpha()
         self.object_hud21 = pg.image.load("assets/ObjectHud21.png").convert_alpha()
@@ -72,11 +72,33 @@ class Interface:
         screen.blit(mouse_coords_hud, (self.pos[0]+self.mouse_coords_font_size//2,self.pos[1]-self.mouse_coords_font_size-2))
         
     def show_fps(self, clock):
-        pg.display.set_caption("FPS: {:.2f}".format(clock.get_fps()))
+        pg.display.set_caption("FPS: {:.1f}".format(clock.get_fps()))
 
     def time(self, time_k, screen):
-        time_hud = self.fnt.render((f'TIME: {"{:.0f}".format(round(time_k, 5)*1000)}'), 1, (200, 200, 200))
-        screen.blit(time_hud, (5, 5))
+        if 2591999 > time_k * 1000 > 1:
+            if 60 > time_k * 1000 > 0:
+                k = 1
+                e = 'sec'
+            if 3600 > time_k * 1000 >= 60:
+                k = 60
+                e = 'min'
+            if 86400 > time_k * 1000 >= 3600:
+                k = 3600
+                e = 'hours'
+            if 2591999 > time_k * 1000 >= 86400:
+                k = 86400
+                e = 'days'
+            
+            time_hud = self.fnt4.render((f'{"{:.2f}".format(round(time_k, 5)*1000/k)} {e}/sec'), 1, (200, 200, 200))
+            screen.blit(time_hud, (5, 5))
+        else:        
+            if time_k * 1000 > 60:
+                time_hud = self.fnt4.render((f'30 days/sec'), 1, (200, 200, 200))
+                screen.blit(time_hud, (5, 5))
+            if time_k * 1000 < 1:
+                time_hud = self.fnt4.render((f'Realtime'), 1, (200, 200, 200))
+                screen.blit(time_hud, (5, 5))
+    
     
     def camera_menu(self, screen, camera, grid):
         input11 = self.area_active3.get_rect(topleft = (300, 60))
