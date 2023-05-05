@@ -94,7 +94,7 @@ class Astronomy:
                                     1.48*10**23, 
                                     0, sqrt(self.G*self.Sun.m / (5.2 * self.AU)) + sqrt(self.G*self.Jupiter.m / 1_070_400_000), 
                                     2_634_000,
-                                    'Satellite',
+                                    None,
                                     (215, 215, 175))
         
         self.Callisto = AstroObjects(5.2 * self.AU + 1_882_709_000,
@@ -103,7 +103,7 @@ class Astronomy:
                                     1.1*10**23, 
                                     0, sqrt(self.G*self.Sun.m / (5.2 * self.AU)) + sqrt(self.G*self.Jupiter.m / 1_882_709_000), 
                                     4_821_000,
-                                    'Satellite',
+                                    None,
                                     (95, 150, 135)) 
 
         self.Io = AstroObjects(5.2 * self.AU - 421_700_000 ,
@@ -112,7 +112,7 @@ class Astronomy:
                                     8.9*10**22, 
                                     0, sqrt(self.G*self.Sun.m / (5.2 * self.AU)) + sqrt(self.G*self.Jupiter.m / 421_700_000), 
                                     3_643_000,
-                                    'Satellite',
+                                    None,
                                     (245, 235, 130))
         
         self.Europa = AstroObjects(5.2 * self.AU - 671_034_000,
@@ -121,7 +121,7 @@ class Astronomy:
                                     4.8*10**22,
                                     0, sqrt(self.G*self.Sun.m / (5.2 * self.AU)) + sqrt(self.G*self.Jupiter.m / 671_034_000), 
                                     3_122_000,
-                                    'Satellite',
+                                    None,
                                     (165, 175, 140))
         
         self.Saturn = AstroObjects(9.55 * self.AU,
@@ -195,7 +195,7 @@ class Astronomy:
         
         
         
-        self.objects = [self.Sun,self.Mercury, self.Venus, self.Earth, self.Moon, self.Ceres, self.Mars,
+        self.objects = [self.Sun, self.Mercury, self.Venus, self.Earth, self.Moon, self.Ceres, self.Mars,
                         self.Jupiter, self.Saturn, self.Uranus, self.Neptune, self.Triton, self.Europa, self.Ganymede,
                         self.Io, self.Callisto]
         
@@ -232,6 +232,11 @@ class Astronomy:
             pg.time.wait(150)
             self.astro_interface.hide = not self.astro_interface.hide
             
+        if keys[pg.K_c]:
+            for obj in self.objects:
+                obj.trace.clear()
+        
+        self.astro_interface.obj_trace(screen, camera)
         self.astro_interface.obj_name(screen, camera)
         self.astro_interface.obj_menu(screen, self.G)
-        self.astro_interface.obj_trace(screen, camera)
+        

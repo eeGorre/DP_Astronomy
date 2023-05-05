@@ -16,23 +16,23 @@ class Astro_Interface:
         screen.blit(mouse_coords_hud, (self.pos[0]+self.mouse_coords_font_size//2,self.pos[1]-self.mouse_coords_font_size-2))
 
     def obj_name(self, screen, camera):  
-        if self.hide == False:  
+        if not self.hide:  
             for obj in self.objects:
-                if obj.obj_type != 'Sputnik':
+                if obj.obj_type != 'Satellite':
                     planet_name = self.fnt.render(obj.name, 1, (130, 130, 130))
                     screen.blit(planet_name, ((obj.x + obj.radius) * camera.e - camera.Ox, (obj.y - obj.radius) * camera.e - camera.Oy))
                 
     def obj_trace(self, screen, camera):
-        if self.hide == False: 
+        if not self.hide: 
             for obj in self.objects:
-                if obj.obj_type != 'Sputnik':
+                if obj.obj_type != 'Satellite':
                     obj.trace.append((obj.x, obj.y))
                     if len(obj.trace) < 5000:
                         for i in range(1, len(obj.trace), 100):
                             x1, y1 = obj.trace[i-1]
                             x1 = x1 * camera.e - camera.Ox
                             y1 = y1 * camera.e - camera.Oy
-                            pg.draw.line(screen, (100, 100, 100), (x1, y1), (x1, y1), 1)
+                            pg.draw.line(screen, (120, 120, 120), (x1, y1), (x1, y1), 2)
                     else:
                         del obj.trace[:100]
                 
@@ -61,11 +61,12 @@ class Astro_Interface:
                 
                 obj_radius = self.fnt2.render(f'Радиус: {int(obj.radius/1000)} км', 1, (135, 135, 135))
                 obj_mass = self.fnt2.render(f'Масса: {obj.m:.2e} кг', 1, (135, 135, 135))
-                obj_rotation_period = self.fnt2.render('TBA', 1, (135, 135, 135))
+                obj_rotation_period = self.fnt2.render('Период вращения: TBA', 1, (135, 135, 135))
                 obj_speed = self.fnt2.render(f'Скорость: {round((sqrt(obj.vx**2 + obj.vy**2))/1000, 3)} км/c', 1, (135, 135, 135))
                 obj_fcv = self.fnt2.render(f'Первая космическая: {round(obj.fcv/1000, 2)} км/с', 1, (135, 135, 135))
                 obj_scv = self.fnt2.render(f'Вторая космическая: {round(obj.scv/1000, 2)} км/c', 1, (135, 135, 135))
                 obj_type = self.fnt2.render(f'Класс объекта: {obj.obj_type}', 1, (135, 135, 135))
+                obj_parent = self.fnt2.render(f'Родительский объект: {obj.parent}', 1, (135, 135, 135))
                 # obj_temperature = self.fnt2.render(f'Температура: TBA', 1, (135, 135, 135))
                 # obj_density = self.fnt2.render(f'Плотность: TBA', 1, (135, 135, 135))
                 # obj_age = self.fnt2.render(f'Возраст: TBA', 1, (135, 135, 135))
@@ -77,6 +78,7 @@ class Astro_Interface:
                 screen.blit(obj_fcv, (WIN_WIDTH*0.79, WIN_HEIGHT*0.37))
                 screen.blit(obj_scv, (WIN_WIDTH*0.79, WIN_HEIGHT*0.405))
                 screen.blit(obj_type, (WIN_WIDTH*0.79, WIN_HEIGHT*0.440))
+                screen.blit(obj_parent, (WIN_WIDTH*0.79, WIN_HEIGHT*0.475))
                 # screen.blit(obj_temperature, (WIN_WIDTH*0.79, WIN_HEIGHT*0.3))
                 # screen.blit(obj_density, (WIN_WIDTH*0.79, WIN_HEIGHT*0.335))
                 # screen.blit(obj_age, (WIN_WIDTH*0.79, WIN_HEIGHT*0.37))

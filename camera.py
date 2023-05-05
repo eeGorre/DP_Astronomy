@@ -5,7 +5,7 @@ from settings import WIN_WIDTH, WIN_HEIGHT
 class Camera:
     def __init__(self):
         self.k = 1.2 # Zoom ratio
-        self.n = -120 # Zoom_step
+        self.n = -107 # Zoom_step
         self.e = self.k**self.n
         self.Ox = -WIN_WIDTH // 2
         self.Oy = -WIN_HEIGHT // 2

@@ -41,7 +41,7 @@ class AstroObjects:
                        (radius))
 
         if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-            if (self.x*camera.e - camera.Ox) - (radius * 2) <= mouse_pos[0] <= (self.x*camera.e - camera.Ox) + (radius * 2) and (self.y*camera.e - camera.Oy) - (radius * 2) <= mouse_pos[1] <= (self.y*camera.e - camera.Oy) + (radius * 2):
+            if (self.x*camera.e - camera.Ox) - (radius * 3) <= mouse_pos[0] <= (self.x*camera.e - camera.Ox) + (radius * 3) and (self.y*camera.e - camera.Oy) - (radius * 3) <= mouse_pos[1] <= (self.y*camera.e - camera.Oy) + (radius * 3):
                 self.selected = True
                 pg.time.wait(200)
             else:
